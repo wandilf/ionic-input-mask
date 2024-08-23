@@ -41,17 +41,25 @@ export class IonicInputMaskDirective {
         }
       }
     } else {
-      let maskIndex = value.length;
-      let formatted = '';
-      formatted += value;
-      if (maskIndex < pattern.length) {
-        //apply trailing formatting
-        while (pattern[maskIndex] !== '*') {
-          formatted += pattern[maskIndex];
-          maskIndex++;
+      if(event.keyCode === 229){
+
+        if(value.length > 0){
+          value = String(value).slice(0, -1);
         }
+        
+        }else{
+        let maskIndex = value.length;
+        let formatted = '';
+        formatted += value;
+        if (maskIndex < pattern.length) {
+          //apply trailing formatting
+          while (pattern[maskIndex] !== '*') {
+            formatted += pattern[maskIndex];
+            maskIndex++;
+          }
+        }
+        value = formatted;
       }
-      value = formatted;
     }
     event.target.value = value;
     if (this.model) {
